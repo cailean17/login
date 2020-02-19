@@ -1,0 +1,47 @@
+{% extends "/common.html" %}
+
+{% block content %}
+<div class="jumbotron ">
+    <div class="container text-center">
+        <h1> Home </h1>
+        <h5>Login Click <a href="/login">Here</a> <a href="/logout">Logout</a></h5>
+        {% for y in get_flashed_messages() %}
+        <h5><code>{{y}}</code></h5>
+        {% endfor %}
+    </div>
+    <div class="container text-right">
+
+        {{moment(session['loginTime']).fromNow(refresh=True)}}
+
+    </div>
+</div>
+<div class="container" id="data">
+    <div>
+        <form method="POST">
+            <input type="text" name="title" class="form-control" placeholder="Title">
+            <input type="text" name="post" class="form-control" placeholder="Post">
+            <input type="submit" class="btn btn-primary text-center">
+
+        </form>
+    </div>
+    <div>
+
+        {% for x in y %}
+
+        {% if x['time'] %}
+
+        <p><b>{{x['title']}}</b></p>
+        <p>{{x['post']}}</p>
+
+        <h5>{{moment(x['time']).fromNow(refresh=True)}}</h5>
+        {% endif %}
+        {% else %}
+
+        <h1>No Entries Found</h1>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}
